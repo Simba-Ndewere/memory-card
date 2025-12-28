@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -9,7 +8,7 @@
     max-width: 1200px;
     margin: 0 auto;
     background-color: white;
-    border: solid 2px black;
+    border: solid 1px gray;
 }
 
 .html {
@@ -28,5 +27,16 @@
 .scoreGroup {
     display: flex;
     flex-direction: column;
+}
 
+.emojiContainer {
+    border: red 2px solid;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.item {
+    border: solid 2px black;
 }
