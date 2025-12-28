@@ -1,0 +1,17 @@
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border: solid 2px black;
+}
+
+.html {
+    font-size: 16px;
+}
