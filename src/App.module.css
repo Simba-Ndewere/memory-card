@@ -15,3 +15,18 @@
 .html {
     font-size: 16px;
 }
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    padding: 1em;
+}
+
+.scoreGroup {
+    display: flex;
+    flex-direction: column;
+
+}
