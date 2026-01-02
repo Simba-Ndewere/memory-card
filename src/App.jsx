@@ -5,16 +5,19 @@ import { GiphyFetch } from '@giphy/js-fetch-api'
 function App() {
 
   const gf = new GiphyFetch('gbZIdfserhdWr1e0JiDrVZ0EqLVuE7R7');
+  let emojisArray = [];
+
+  const [gifState, setGifState] = useState(emojisArray)
+
+  async function fetchEmojis() {
+    const { data: gifs } = await gf.search('face emojis', { limit: 18, type: 'gifs' });
+    setGifState(gifs);
+    console.log(gifState)
+  }
 
   useEffect(() => {
     fetchEmojis();
   }, []);
-
-  async function fetchEmojis() {
-      const { data: gifs } = await gf.search('face emojis', { limit: 18, type: 'gifs' });
-      console.log('simba');
-      console.log(gifs);
-    }
 
   return (
     <div className={appCSS.container}>
@@ -26,20 +29,13 @@ function App() {
         </div>
       </div>
       <div className={appCSS.emojiContainer}>
-        <div className={appCSS.item}>Item 1</div>
-        <div className={appCSS.item}>Item 2</div>
-        <div className={appCSS.item}>Item 3</div>
-        <div className={appCSS.item}>Item 4</div>
-        <div className={appCSS.item}>Item 5</div>
-        <div className={appCSS.item}>Item 6</div>
-        <div className={appCSS.item}>Item 7</div>
-        <div className={appCSS.item}>Item 8</div>
-        <div className={appCSS.item}>Item 9</div>
-        <div className={appCSS.item}>Item 10</div>
-        <div className={appCSS.item}>Item 11</div>
-        <div className={appCSS.item}>Item 12</div>
-      </div>
+        {gifState.map((emoji) => {
+          return <div className={appCSS.item}>
+            <img src={emoji.images["480w_still"].url}></img>
+            </div>
+        })}
     </div>
+    </div >
   )
 }
 
