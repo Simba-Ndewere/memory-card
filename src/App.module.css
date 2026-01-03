@@ -8,6 +8,7 @@
     max-width: 1200px;
     margin: 0 auto;
     background-color: white;
+    border: solid 2px red;
 }
 
 .html {
@@ -34,9 +35,10 @@
     grid-template-rows: repeat(3, 1fr);
     gap: 25px;
     padding: 1em;
+    align-items: center;
 }
 
-.item {
-    border: solid 2px black;
-    height: 150px;
+img {
+    height: 200px;
+    width: 200px;
 }
