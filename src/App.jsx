@@ -5,20 +5,24 @@ import { GiphyFetch } from '@giphy/js-fetch-api'
 function App() {
 
   const gf = new GiphyFetch('gbZIdfserhdWr1e0JiDrVZ0EqLVuE7R7');
-  let emojisArray = [];
 
-  const [gifState, setGifState] = useState(emojisArray)
+  const [gifMap, setGifMap] = useState([]);
+  const [gifSelectedId, setGifSelectedId] = useState([]);
+
+  function randomNumber() {
+    return Math.floor(Math.random() * 18);
+  }
 
   async function fetchEmojis() {
-    const { data: gifs } = await gf.search('face emojis', { limit: 18, type: 'gifs' });
-    setGifState(gifs);
-    console.log(gifState)
+    const { data: gifs } = await gf.search('face emoji', { limit: 18, type: 'gifs', sort: 'relevant' });
+    setGifMap(gifs);
   }
 
   useEffect(() => {
     fetchEmojis();
   }, []);
-
+  
+  
   return (
     <div className={appCSS.container}>
       <div className={appCSS.header}>
@@ -29,12 +33,15 @@ function App() {
         </div>
       </div>
       <div className={appCSS.emojiContainer}>
-        {gifState.map((emoji) => {
-          return <div className={appCSS.item}>
-            <img src={emoji.images["480w_still"].url}></img>
+        {gifMap.map((emoji, index) => {
+          console.log(emoji.id);
+          if (index < 12) {
+            return <div className={appCSS.item}>
+              <img src={emoji.images["480w_still"].url}></img>
             </div>
+          }
         })}
-    </div>
+      </div>
     </div >
   )
 }
