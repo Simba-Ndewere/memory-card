@@ -34,7 +34,8 @@
     grid-template-rows: repeat(3, 1fr);
     gap: 25px;
     padding: 1em;
-    align-items: center;
+    border: solid 2px black;
+    place-items: center;
 }
 
 img {
