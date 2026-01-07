@@ -7,7 +7,9 @@ function App() {
   const gf = new GiphyFetch('gbZIdfserhdWr1e0JiDrVZ0EqLVuE7R7');
 
   const [gifMap, setGifMap] = useState([]);
-  const [gifSelectedId, setGifSelectedId] = useState([]);
+  const [gifSelected, setGifSelected] = useState([]);
+
+  console.log(gifSelected);
 
   function randomNumber() {
     return Math.floor(Math.random() * 18);
@@ -21,8 +23,7 @@ function App() {
   useEffect(() => {
     fetchEmojis();
   }, []);
-  
-  
+
   return (
     <div className={appCSS.container}>
       <div className={appCSS.header}>
@@ -34,10 +35,9 @@ function App() {
       </div>
       <div className={appCSS.emojiContainer}>
         {gifMap.map((emoji, index) => {
-          console.log(emoji.id);
           if (index < 12) {
             return <div className={appCSS.item}>
-              <img src={emoji.images["480w_still"].url}></img>
+              <img src={emoji.images["480w_still"].url} onClick={() => setGifSelected([...gifSelected, emoji.id])}></img>
             </div>
           }
         })}
