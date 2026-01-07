@@ -8,13 +8,30 @@ function App() {
 
   const [gifMap, setGifMap] = useState([]);
   const [gifSelected, setGifSelected] = useState([]);
-
-  console.log(gifSelected);
+  const uniqueNumbers = [];
 
   function randomNumber() {
-    return Math.floor(Math.random() * 18);
+    let exit = true;
+    let uniqueNumber = 0;
+    while (exit) {
+      uniqueNumber = Math.floor(Math.random() * 18);
+      if (!uniqueNumbers.includes(uniqueNumber)) {
+        exit = false;
+      }
+    }
+    uniqueNumbers.push(uniqueNumber);
+    return uniqueNumber;
   }
 
+  function shuffleGifs() {
+    const newGifArray = [];
+    for (let a = 0; a < 18; a++) {
+      newGifArray.push(gifMap[randomNumber()]);
+    }
+    return newGifArray;
+  }
+
+  console.log(gifMap);
   async function fetchEmojis() {
     const { data: gifs } = await gf.search('face emoji', { limit: 18, type: 'gifs', sort: 'relevant' });
     setGifMap(gifs);
@@ -37,7 +54,10 @@ function App() {
         {gifMap.map((emoji, index) => {
           if (index < 12) {
             return <div className={appCSS.item}>
-              <img src={emoji.images["480w_still"].url} onClick={() => setGifSelected([...gifSelected, emoji.id])}></img>
+              <img src={emoji.images["480w_still"].url} onClick={() => {
+                setGifSelected([...gifSelected, emoji.id]);
+                setGifMap(shuffleGifs());
+              }}></img>
             </div>
           }
         })}
