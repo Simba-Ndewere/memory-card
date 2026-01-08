@@ -8,7 +8,18 @@ function App() {
 
   const [gifMap, setGifMap] = useState([]);
   const [gifSelected, setGifSelected] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
   const uniqueNumbers = [];
+
+  function clearScoreFunction() {
+    setCurrentScore(0);
+  }
+
+  function increaseScoreFunction() {
+    setCurrentScore(currentScore + 1);
+  }
 
   function randomNumber() {
     let exit = true;
@@ -31,7 +42,6 @@ function App() {
     return newGifArray;
   }
 
-  console.log(gifMap);
   async function fetchEmojis() {
     const { data: gifs } = await gf.search('face emoji', { limit: 18, type: 'gifs', sort: 'relevant' });
     setGifMap(gifs);
@@ -46,8 +56,8 @@ function App() {
       <div className={appCSS.header}>
         <h2> Emoji Rush </h2>
         <div className={appCSS.scoreGroup}>
-          <div>Current Score</div>
-          <div>Best Score</div>
+          <div>Current Score {currentScore}</div>
+          <div>Best Score {bestScore}</div>
         </div>
       </div>
       <div className={appCSS.emojiContainer}>
@@ -57,6 +67,7 @@ function App() {
               <img src={emoji.images["480w_still"].url} onClick={() => {
                 setGifSelected([...gifSelected, emoji.id]);
                 setGifMap(shuffleGifs());
+                gifSelected.includes(emoji.id) ? clearScoreFunction() : increaseScoreFunction();
               }}></img>
             </div>
           }

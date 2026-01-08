@@ -34,11 +34,14 @@
     grid-template-rows: repeat(3, 1fr);
     gap: 25px;
     padding: 1em;
-    border: solid 2px black;
     place-items: center;
 }
 
 img {
     height: 200px;
     width: 200px;
+}
+
+img:hover {
+    cursor: pointer;
 }
