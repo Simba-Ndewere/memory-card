@@ -31,15 +31,15 @@
 .emojiContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 25px;
     padding: 1em;
     place-items: center;
 }
 
 img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
 }
 
 img:hover {
