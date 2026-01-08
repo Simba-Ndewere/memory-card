@@ -15,6 +15,9 @@ function App() {
 
   function clearScoreFunction() {
     setCurrentScore(0);
+    setGifSelected([]);
+    if (currentScore > bestScore)
+      setBestScore(currentScore)
   }
 
   function increaseScoreFunction() {
