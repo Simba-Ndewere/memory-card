@@ -13,8 +13,6 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
-  console.log(gifMap);
-
   const uniqueNumbers = [];
   function clearScoreFunction() {
     setCurrentScore(0);
@@ -22,6 +20,8 @@ function App() {
     if (currentScore > bestScore)
       setBestScore(currentScore)
   }
+
+  console.log(gifMap[0]);
 
   function increaseScoreFunction() {
     setCurrentScore(currentScore + 1);
@@ -50,10 +50,10 @@ function App() {
 
   async function fetchEmojis() {
     const { data: gifs } = await gf.search('@JoyPixels face', { limit: 18, type: 'gifs', sort: 'relevant' });
-    //console.log(gifs);
+    console.log(gifs);
     setGifMap(
-      gifs.filter(gif => 
-         gif.id !== gif1 && gif.id !== gif2
+      gifs.filter(gif =>
+        gif.id !== gif1 && gif.id !== gif2
       )
     )
   }
@@ -75,11 +75,17 @@ function App() {
         {gifMap.map((emoji, index) => {
           if (index < 8) {
             return <div className={appCSS.item}>
-              <img src={emoji.images["480w_still"].url} onClick={() => {
-                setGifSelected([...gifSelected, emoji.id]);
-                setGifMap(shuffleGifs());
-                gifSelected.includes(emoji.id) ? clearScoreFunction() : increaseScoreFunction();
-              }}></img>
+              <video
+                src={emoji.images.fixed_height.mp4}
+                autoPlay
+                loop
+                muted
+                playsInline
+                onClick={() => {
+                  setGifSelected([...gifSelected, emoji.id]);
+                  setGifMap(shuffleGifs());
+                  gifSelected.includes(emoji.id) ? clearScoreFunction() : increaseScoreFunction();
+                }}></video>
             </div>
           }
         })}
