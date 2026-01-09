@@ -46,3 +46,27 @@ video {
 img:hover {
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+    .emojiContainer {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    video {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+    .emojiContainer {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    video {
+        height: 200px;
+        width: 200px;
+    }
+}
