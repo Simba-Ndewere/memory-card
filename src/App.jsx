@@ -74,7 +74,7 @@ function App() {
       <div className={appCSS.emojiContainer}>
         {gifMap.map((emoji, index) => {
           if (index < 8) {
-            return <div className={appCSS.item}>
+            return <div key={emoji.id} className={appCSS.item}>
               <video
                 src={emoji.images.fixed_height.mp4}
                 autoPlay
