@@ -25,7 +25,8 @@
 
 .scoreGroup {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .emojiContainer {
@@ -37,7 +38,7 @@
     place-items: center;
 }
 
-img {
+video {
     height: 250px;
     width: 250px;
 }
