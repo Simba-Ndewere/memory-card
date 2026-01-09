@@ -21,8 +21,6 @@ function App() {
       setBestScore(currentScore)
   }
 
-  console.log(gifMap[0]);
-
   function increaseScoreFunction() {
     setCurrentScore(currentScore + 1);
   }
@@ -50,7 +48,6 @@ function App() {
 
   async function fetchEmojis() {
     const { data: gifs } = await gf.search('@JoyPixels face', { limit: 18, type: 'gifs', sort: 'relevant' });
-    console.log(gifs);
     setGifMap(
       gifs.filter(gif =>
         gif.id !== gif1 && gif.id !== gif2

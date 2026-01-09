@@ -7,7 +7,7 @@ The project is part of The Odin Project's JavaScript curriculum. You can view th
 - Interactive memory card gameplay
 - Current score tracking
 - Best score tracking
-- Randomized card shuffle after each click
+- Randomised card shuffle after each click
 - Animated emoji cards fetched from an external API
 - Responsive layout for different screen sizes
 
