@@ -5,14 +5,17 @@ import { GiphyFetch } from '@giphy/js-fetch-api'
 function App() {
 
   const gf = new GiphyFetch('gbZIdfserhdWr1e0JiDrVZ0EqLVuE7R7');
+  const gif1 = '5jYfdR7KVIOKt7YUfo';
+  const gif2 = '1X7mEAT2Kkk8oYFsul';
 
   const [gifMap, setGifMap] = useState([]);
   const [gifSelected, setGifSelected] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
-  const uniqueNumbers = [];
+  console.log(gifMap);
 
+  const uniqueNumbers = [];
   function clearScoreFunction() {
     setCurrentScore(0);
     setGifSelected([]);
@@ -28,7 +31,7 @@ function App() {
     let exit = true;
     let uniqueNumber = 0;
     while (exit) {
-      uniqueNumber = Math.floor(Math.random() * 18);
+      uniqueNumber = Math.floor(Math.random() * gifMap.length);
       if (!uniqueNumbers.includes(uniqueNumber)) {
         exit = false;
       }
@@ -39,15 +42,20 @@ function App() {
 
   function shuffleGifs() {
     const newGifArray = [];
-    for (let a = 0; a < 18; a++) {
+    for (let a = 0; a < 8; a++) {
       newGifArray.push(gifMap[randomNumber()]);
     }
     return newGifArray;
   }
 
   async function fetchEmojis() {
-    const { data: gifs } = await gf.search('face emoji', { limit: 18, type: 'gifs', sort: 'relevant' });
-    setGifMap(gifs);
+    const { data: gifs } = await gf.search('@JoyPixels face', { limit: 18, type: 'gifs', sort: 'relevant' });
+    //console.log(gifs);
+    setGifMap(
+      gifs.filter(gif => 
+         gif.id !== gif1 && gif.id !== gif2
+      )
+    )
   }
 
   useEffect(() => {
@@ -65,7 +73,7 @@ function App() {
       </div>
       <div className={appCSS.emojiContainer}>
         {gifMap.map((emoji, index) => {
-          if (index < 12) {
+          if (index < 8) {
             return <div className={appCSS.item}>
               <img src={emoji.images["480w_still"].url} onClick={() => {
                 setGifSelected([...gifSelected, emoji.id]);
